@@ -1,0 +1,100 @@
+name: Python Greetings Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-pip-deps:
+    runs-on: self-hosted
+    steps:
+      - name: Install dependencies stage
+        uses: ./.github/actions/install-pip-deps
+        with:
+          app_path: python-greetings
+
+  deploy-to-dev:
+    runs-on: self-hosted
+    needs: install-pip-deps
+    steps:
+      - name: Deploy to dev stage
+        uses: ./.github/actions/deploy-service
+        with:
+          env_name: dev
+          port: 7001
+          app_path: python-greetings
+
+  tests-on-dev:
+    runs-on: self-hosted
+    needs: deploy-to-dev
+    steps:
+      - name: Test on dev stage
+        uses: ./.github/actions/run-api-tests
+        with:
+          env_name: dev
+          tests_path: course-js-api-framework
+
+  deploy-to-stg:
+    runs-on: self-hosted
+    needs: tests-on-dev
+    steps:
+      - name: Deploy to stg stage
+        uses: ./.github/actions/deploy-service
+        with:
+          env_name: stg
+          port: 7002
+          app_path: python-greetings
+
+  tests-on-stg:
+    runs-on: self-hosted
+    needs: deploy-to-stg
+    steps:
+      - name: Test on stg stage
+        uses: ./.github/actions/run-api-tests
+        with:
+          env_name: stg
+          tests_path: course-js-api-framework
+
+  deploy-to-preprod:
+    runs-on: self-hosted
+    needs: tests-on-stg
+    steps:
+      - name: Deploy to preprod stage
+        uses: ./.github/actions/deploy-service
+        with:
+          env_name: preprod
+          port: 7003
+          app_path: python-greetings
+
+  tests-on-preprod:
+    runs-on: self-hosted
+    needs: deploy-to-preprod
+    steps:
+      - name: Test on preprod stage
+        uses: ./.github/actions/run-api-tests
+        with:
+          env_name: preprod
+          tests_path: course-js-api-framework
+
+  deploy-to-prod:
+    runs-on: self-hosted
+    needs: tests-on-preprod
+    steps:
+      - name: Deploy to prod stage
+        uses: ./.github/actions/deploy-service
+        with:
+          env_name: prod
+          port: 7004
+          app_path: python-greetings
+
+  tests-on-prod:
+    runs-on: self-hosted
+    needs: deploy-to-prod
+    steps:
+      - name: Test on prod stage
+        uses: ./.github/actions/run-api-tests
+        with:
+          env_name: prod
+          tests_path: course-js-api-framework

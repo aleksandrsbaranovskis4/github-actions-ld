@@ -1,0 +1,36 @@
+name: run-api-tests
+description: Run API tests against selected environment
+
+inputs:
+  env_name:
+    description: Environment name
+    required: true
+  tests_path:
+    description: Directory where test repo will be cloned
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout pipeline repository
+      uses: actions/checkout@v4
+
+    - name: Clone API test repository
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/course-js-api-framework
+        path: ${{ inputs.tests_path }}
+
+    - name: Print test info
+      shell: bash
+      run: echo "Running tests on ${{ inputs.env_name }}..."
+
+    - name: Install npm packages
+      shell: bash
+      working-directory: ${{ inputs.tests_path }}
+      run: npm install
+
+    - name: Run greetings tests
+      shell: bash
+      working-directory: ${{ inputs.tests_path }}
+      run: npm run greetings greetings_${{ inputs.env_name }}

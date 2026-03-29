@@ -1,0 +1,37 @@
+name: deploy-service
+description: Deploy greetings service to selected environment
+
+inputs:
+  env_name:
+    required: true
+  port:
+    required: true
+  app_path:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout pipeline repository
+      uses: actions/checkout@v4
+
+    - name: Clone python-greetings repository
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: ${{ inputs.app_path }}
+
+    - name: Print deploy info
+      shell: cmd
+      run: echo Deploying to %INPUT_ENV_NAME%...
+
+    - name: Stop previous service
+      shell: cmd
+      run: |
+        pm2 delete greetings-app-${{ inputs.env_name }} & EXIT /B 0
+
+    - name: Start service with PM2
+      shell: cmd
+      working-directory: ${{ inputs.app_path }}
+      run: |
+        pm2 start venv\Scripts\python --name greetings-app-${{ inputs.env_name }} -- app.py --port=${{ inputs.port }} --env=${{ inputs.env_name }}
