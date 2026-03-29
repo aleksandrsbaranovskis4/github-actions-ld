@@ -12,16 +12,16 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Stop previous service
-      shell: cmd
-      run: |
-        pm2 delete greetings-app-${{ inputs.env_name }} & set "errorlevel=0"
-    
     - name: Clone python-greetings repository
       uses: actions/checkout@v4
       with:
         repository: mtararujs/python-greetings
         path: ${{ inputs.app_path }}
+    
+    - name: Stop previous service
+      shell: cmd
+      run: |
+        pm2 delete greetings-app-${{ inputs.env_name }} & set "errorlevel=0"
 
     - name: Print deploy info
       shell: cmd
