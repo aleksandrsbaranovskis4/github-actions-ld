@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install dependencies stage
         uses: ./.github/actions/install-pip-deps
@@ -23,7 +23,7 @@ jobs:
     needs: install-pip-deps
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy to dev stage
         uses: ./.github/actions/deploy-service
@@ -37,7 +37,7 @@ jobs:
     needs: deploy-to-dev
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Test on dev stage
         uses: ./.github/actions/run-api-tests
@@ -50,7 +50,7 @@ jobs:
     needs: tests-on-dev
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy to stg stage
         uses: ./.github/actions/deploy-service
@@ -64,7 +64,7 @@ jobs:
     needs: deploy-to-stg
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Test on stg stage
         uses: ./.github/actions/run-api-tests
@@ -77,7 +77,7 @@ jobs:
     needs: tests-on-stg
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy to preprod stage
         uses: ./.github/actions/deploy-service
@@ -91,7 +91,7 @@ jobs:
     needs: deploy-to-preprod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Test on preprod stage
         uses: ./.github/actions/run-api-tests
@@ -104,7 +104,7 @@ jobs:
     needs: tests-on-preprod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy to prod stage
         uses: ./.github/actions/deploy-service
@@ -118,7 +118,7 @@ jobs:
     needs: deploy-to-prod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Test on prod stage
         uses: ./.github/actions/run-api-tests
