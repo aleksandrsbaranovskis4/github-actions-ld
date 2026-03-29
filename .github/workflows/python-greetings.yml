@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies stage
         uses: ./.github/actions/install-pip-deps
         with:
-          app_path: C:\test\python-greetings
+          app_path: python-greetings
 
   deploy-to-dev:
     runs-on: self-hosted
