@@ -23,6 +23,18 @@ runs:
       shell: cmd
       run: echo Deploying to %INPUT_ENV_NAME%...
 
+    - name: Create virtual environment
+      shell: cmd
+      working-directory: ${{ inputs.app_path }}
+      run: python -m venv venv
+
+    - name: Install requirements
+      shell: cmd
+      working-directory: ${{ inputs.app_path }}
+      run: |
+        venv\Scripts\python -m pip install --upgrade pip
+        venv\Scripts\python -m pip install -r requirements.txt
+
     - name: Stop previous service
       shell: cmd
       run: |
