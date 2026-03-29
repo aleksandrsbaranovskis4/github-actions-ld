@@ -13,7 +13,7 @@ runs:
   using: "composite"
   steps:
     - name: Clone python-greetings repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v4
       with:
         repository: mtararujs/python-greetings
         path: ${{ inputs.app_path }}
@@ -21,7 +21,7 @@ runs:
     - name: Stop previous service
       shell: cmd
       run: |
-        pm2 delete greetings-app-${{ inputs.env_name }} & set "errorlevel=0"
+        pm2 delete greetings-app-${{ inputs.env_name }} & EXIT /B 0
 
     - name: Print deploy info
       shell: cmd
@@ -43,4 +43,4 @@ runs:
       shell: cmd
       working-directory: ${{ inputs.app_path }}
       run: |
-        pm2 start venv\Scripts\python --name greetings-app-${{ inputs.env_name }} -- app.py --port=${{ inputs.port }}
+        pm2 start app.py --name greetings-app-${{ inputs.env_name }} --interpreter venv\Scripts\python.exe -- --port ${{ inputs.port }}
