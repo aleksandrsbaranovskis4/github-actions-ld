@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies stage
         uses: ./.github/actions/install-pip-deps
         with:
-          app_path: python-greetings
+          app_path: C:\test\python-greetings
 
   deploy-to-dev:
     runs-on: self-hosted
@@ -30,7 +30,7 @@ jobs:
         with:
           env_name: dev
           port: 7001
-          app_path: python-greetings-dev
+          app_path: C:\test\python-greetings-dev
 
   tests-on-dev:
     runs-on: self-hosted
@@ -57,7 +57,7 @@ jobs:
         with:
           env_name: stg
           port: 7002
-          app_path: python-greetings-stg
+          app_path: C:\test\python-greetings-stg
 
   tests-on-stg:
     runs-on: self-hosted
@@ -84,7 +84,7 @@ jobs:
         with:
           env_name: preprod
           port: 7003
-          app_path: python-greetings-preprod
+          app_path: C:\test\python-greetings-preprod
 
   tests-on-preprod:
     runs-on: self-hosted
@@ -111,7 +111,7 @@ jobs:
         with:
           env_name: prod
           port: 7004
-          app_path: python-greetings-prod
+          app_path: C:\test\python-greetings-prod
 
   tests-on-prod:
     runs-on: self-hosted
