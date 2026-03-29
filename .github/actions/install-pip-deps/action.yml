@@ -1,3 +1,24 @@
+name: install-pip-deps
+description: Checkout python-greetings repo, create venv and install dependencies
+
+inputs:
+  app_path:
+    description: Directory where python-greetings repo will be cloned
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Clone python-greetings repository
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: ${{ inputs.app_path }}
+
+    - name: Print info
+      shell: cmd
+      run: echo Installing all required dependencies...
+
     - name: Create virtual environment
       shell: cmd
       working-directory: ${{ inputs.app_path }}
