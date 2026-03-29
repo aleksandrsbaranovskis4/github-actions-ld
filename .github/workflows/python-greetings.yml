@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -25,7 +25,9 @@ jobs:
     needs: install-pip-deps
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          set-safe-directory: false
 
       - name: Deploy to dev stage
         uses: ./.github/actions/deploy-service
@@ -39,7 +41,9 @@ jobs:
     needs: deploy-to-dev
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          set-safe-directory: false
 
       - name: Test on dev stage
         uses: ./.github/actions/run-api-tests
@@ -52,7 +56,7 @@ jobs:
     needs: tests-on-dev
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -68,7 +72,7 @@ jobs:
     needs: deploy-to-stg
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -83,7 +87,7 @@ jobs:
     needs: tests-on-stg
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -99,7 +103,7 @@ jobs:
     needs: deploy-to-preprod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -114,7 +118,7 @@ jobs:
     needs: tests-on-preprod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
@@ -130,7 +134,7 @@ jobs:
     needs: deploy-to-prod
     steps:
       - name: Checkout pipeline repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           set-safe-directory: false
 
