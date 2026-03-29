@@ -12,6 +12,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Stop previous service
+      shell: cmd
+      run: |
+        pm2 delete greetings-app-${{ inputs.env_name }} & EXIT /B 0
+    
     - name: Clone python-greetings repository
       uses: actions/checkout@v6
       with:
@@ -39,8 +44,3 @@ runs:
       working-directory: ${{ inputs.app_path }}
       run: |
         pm2 start app.py --name greetings-app-${{ inputs.env_name }} --interpreter venv\Scripts\python.exe -- --port ${{ inputs.port }}
-    
-    - name: Stop previous service
-      shell: cmd
-      run: |
-        pm2 delete greetings-app-${{ inputs.env_name }} & EXIT /B 0
