@@ -19,15 +19,15 @@ runs:
         path: ${{ inputs.tests_path }}
 
     - name: Print test info
-      shell: bash
+      shell: cmd
       run: echo "Running tests on ${{ inputs.env_name }}..."
 
     - name: Install npm packages
-      shell: bash
+      shell: cmd
       working-directory: ${{ inputs.tests_path }}
       run: npm install
 
     - name: Run greetings tests
-      shell: bash
+      shell: cmd
       working-directory: ${{ inputs.tests_path }}
       run: npm run greetings greetings_${{ inputs.env_name }}
