@@ -12,6 +12,12 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Force cleanup processes
+      run: |
+        powershell -Command "Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force"
+        powershell -Command "Get-Process git -ErrorAction SilentlyContinue | Stop-Process -Force"
+      shell: pwsh
+
     - name: Clone API test repository
       uses: actions/checkout@v6
       with:
