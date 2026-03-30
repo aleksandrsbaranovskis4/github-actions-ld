@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           set-safe-directory: false
+          clean: false
 
       - name: Deploy to dev stage
         uses: ./.github/actions/deploy-service
@@ -60,6 +61,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           set-safe-directory: false
+          clean: false
 
       - name: Deploy to stg stage
         uses: ./.github/actions/deploy-service
@@ -92,6 +94,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           set-safe-directory: false
+          clean: false
 
       - name: Deploy to preprod stage
         uses: ./.github/actions/deploy-service
@@ -124,6 +127,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           set-safe-directory: false
+          clean: false
 
       - name: Deploy to prod stage
         uses: ./.github/actions/deploy-service
