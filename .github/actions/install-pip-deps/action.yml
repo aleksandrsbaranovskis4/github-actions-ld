@@ -1,9 +1,8 @@
 name: install-pip-deps
-description: Checkout python-greetings repo, create venv and install dependencies
+description: Clone python-greetings repo, create virtual environment and install dependencies
 
 inputs:
   app_path:
-    description: Directory where python-greetings repo will be cloned
     required: true
 
 runs:

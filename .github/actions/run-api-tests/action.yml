@@ -3,10 +3,8 @@ description: Run API tests against selected environment
 
 inputs:
   env_name:
-    description: Environment name
     required: true
   tests_path:
-    description: Directory where test repo will be cloned
     required: true
 
 runs:

@@ -1,5 +1,5 @@
 name: deploy-service
-description: Deploy greetings service to selected environment
+description: Deploy greetings service on to selected environment
 
 inputs:
   env_name:
