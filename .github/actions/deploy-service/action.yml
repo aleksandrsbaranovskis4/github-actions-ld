@@ -41,8 +41,8 @@ runs:
         pm2 start app.py --name greetings-app-${{ inputs.env_name }} --interpreter venv\Scripts\python.exe -- --port ${{ inputs.port }}
 
     - name: Wait for app to start
-      shell: cmd
-      run: timeout /t 5 /nobreak
+      shell: powershell
+      run: Start-Sleep -Seconds 5
     
     - name: Stop previous service
       shell: cmd
